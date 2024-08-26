@@ -1,4 +1,4 @@
-import NextAuth from "next-auth"
+import NextAuth, {AuthOptions} from "next-auth"
 import GitHubProvider from "next-auth/providers/github"
 import GoogleProvider from "next-auth/providers/google"
 import bcrypt from "bcryptjs"
@@ -8,7 +8,7 @@ import {db} from "@/lib/db";
 import Credentials from "next-auth/providers/credentials";
 
 
-export const authOptions = {
+export const authOptions:AuthOptions = {
     adapter:PrismaAdapter(db),
     providers:[
         GitHubProvider({
@@ -49,8 +49,6 @@ export const authOptions = {
     },
     secret:process.env.NEXTAUTH_SECRET,
 };
-
-// @ts-ignore
 const handler = NextAuth(authOptions);
 
 export {handler as GET, handler as PUT, handler as DELETE , handler as POST};
