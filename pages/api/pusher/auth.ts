@@ -7,6 +7,7 @@ export default async function handler(
     request:NextApiRequest,
     response:NextApiResponse
 ){
+        // @ts-ignore
         const session = await getServerSession(request,response,authOptions)
         if(!session?.user?.email){
                 return response.status(401)
