@@ -1,13 +1,12 @@
 import {NextApiResponse,NextApiRequest} from "next";
-import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 import {getServerSession} from "next-auth";
 import {pusherServer} from "@/lib/pusher";
+import {authOptions} from "@/src/auth-options";
 
 export default async function handler(
     request:NextApiRequest,
     response:NextApiResponse
 ){
-        // @ts-ignore
         const session = await getServerSession(request,response,authOptions)
         if(!session?.user?.email){
                 return response.status(401)
